@@ -1,11 +1,14 @@
 public class Main {
 
     public static void main(String[] args) {
-        int[] array = {0,5,8,10,100,101,345,400,456,478,492,500,1000};
+        int[] array = {0,5,8,10,100,101,345,400,456,478,500,1000};
 
-        int result = BinarySearch(array, 492);
+        int result = BinarySearch(array, 5);
         if (result != 0){
             System.out.println("Index found: " + result);
+        }
+        else{
+            System.out.println("Not found: " + result);
         }
     }
     /**
@@ -25,18 +28,20 @@ public class Main {
         high = array.length - 1;
         low = 0;
 
-        while (low < high) { // the loop will be executed until the initial range is equal to the final
-            mid = (low + high) >>> 1; // update middle index
+        while (low <= high) { // the loop will be executed until the initial range is equal to the final
+            mid = (low + high) >>> 2; // update middle index
             mid_value = array[mid]; // update guess number
 
-            if (mid_value == item) { // return the found number
+            if (mid_value == item){ // return the found number
                 return mid;
             }
             if (mid_value < item) {  // change start range if guess number less than item
-               low = mid - 1;
-            } else {
-                high = mid + 1; // change end range if guess number more than item
+               low = mid + 1;
             }
+            else if (mid_value > item) {  // change end range if guess number more than item
+                high = mid - 1;
+            }
+
         }
         return 0; // return null if the required number was not found
     }
